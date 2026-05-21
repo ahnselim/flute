@@ -12,6 +12,10 @@ def linspace(start, stop, num, dtype=torch.float32):
 
 
 def get_values_pivots(bits=4, symmetric=False, dtype=torch.float32):
+    if bits == 1:
+        v = torch.tensor([-1.0, 1.0], dtype=dtype)
+        p = torch.tensor([0.0], dtype=dtype)
+        return v.cuda().clone(), p.cuda().clone()
 
     dist = torch.distributions.normal.Normal(torch.tensor(0.0), torch.tensor(1.0))
     offset = 0.5*(1/32 + 1/30)

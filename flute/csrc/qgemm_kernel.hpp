@@ -856,7 +856,7 @@ qgemm_host(int M,
     using namespace cute;
 
     CUTE_STATIC_ASSERT_V(Threads{} % _128{} == _0{});
-    CUTE_STATIC_ASSERT_V(NumBits{} == _4{} || NumBits{} == _3{} || NumBits{} == _2{});
+    CUTE_STATIC_ASSERT_V(NumBits{} == _4{} || NumBits{} == _3{} || NumBits{} == _2{} || NumBits{} == _1{});
 
     using Config = config::GemmConfig<T,
                                       TQ,

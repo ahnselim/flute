@@ -42,7 +42,7 @@ class FluteConfig(QuantizationConfigMixin):
         **kwargs,
     ) -> None:
 
-        if num_bits not in [2, 3, 4]:
+        if num_bits not in [1, 2, 3, 4]:
             raise ValueError
 
         self.quant_method = QuantizationMethod2.FLUTE

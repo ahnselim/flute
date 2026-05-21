@@ -1,4 +1,5 @@
 #include <cuda_runtime.h>
+#include <cuda_bf16.h>
 #include <torch/library.h>
 #include <torch/extension.h>
 #include <ATen/ATen.h>
@@ -158,6 +159,9 @@ qgemm_raw_simple(const at::Tensor&   input,
     do {                                                 \
         switch (num_bits)                                \
         {                                                \
+        case 1:                                          \
+            RUN_QGEMM_RAW_SWITCH_GROUP_SIZE(T, 1);       \
+            break;                                       \
         case 2:                                          \
             RUN_QGEMM_RAW_SWITCH_GROUP_SIZE(T, 2);       \
             break;                                       \

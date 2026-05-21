@@ -134,6 +134,41 @@ def _pack_2bit(W: torch.Tensor, tile_P: int) -> torch.Tensor:
     return Q
 
 
+def _pack_1bit(W: torch.Tensor, tile_P: int) -> torch.Tensor:
+    num_bits = 1
+    chunk_size_0 = 2
+    chunk_size_1 = tile_P * 16
+    chunk_size_2 = tile_P
+
+    W_chunks = (
+        W
+        .view(
+            int(W.shape[0] / chunk_size_0),
+            chunk_size_0,
+            int(W.shape[1] / chunk_size_1),
+            int(chunk_size_1 / chunk_size_2),
+            chunk_size_2,
+        )
+    )
+    W_chunks = W_chunks.transpose(-1, -2)
+    W_chunks_ = torch.zeros_like(W_chunks)
+    for dst in range(8):
+        src = dst
+        W_chunks_[:, 0, :, :, 2 * dst + 0] = W_chunks[:, 1, :, :, src]
+        W_chunks_[:, 0, :, :, 2 * dst + 1] = W_chunks[:, 0, :, :, src]
+    for dst in range(8):
+        src = dst + 8
+        W_chunks_[:, 1, :, :, 2 * dst + 0] = W_chunks[:, 1, :, :, src]
+        W_chunks_[:, 1, :, :, 2 * dst + 1] = W_chunks[:, 0, :, :, src]
+    Q = W_chunks_.reshape(W.shape)
+    Q = packbits_utils.pack_integer_tensors(
+        tensor=safe_cast(Q, dtype=torch.uint8),
+        num_bits=num_bits)
+    Q = Q.view(W.shape[0], -1)
+    Q = Q.T.contiguous()
+    return Q
+
+
 def _pack_3bit(W: torch.Tensor, tile_P: int) -> torch.Tensor:
     if tile_P != 32:
         raise NotImplementedError
@@ -292,6 +327,8 @@ def pack(
 
     if num_bits == 4:
         return _pack_4bit(W, tile_P=tile_P)
+    if num_bits == 1:
+        return _pack_1bit(W, tile_P=tile_P)
     if num_bits == 2:
         return _pack_2bit(W, tile_P=tile_P)
     if num_bits == 3:

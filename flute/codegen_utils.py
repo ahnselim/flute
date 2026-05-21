@@ -107,7 +107,7 @@ def codegen_raw() -> None:
 
     cases = {}
     configs = {}
-    for NumBits in [4, 3, 2]:
+    for NumBits in [4, 3, 2, 1]:
         index = 0
         for SMs_Multiple in options_SMs_Multiple:
             for (Threads, TileM, TileK, TileP) in options_Tiles:
@@ -183,4 +183,3 @@ if __name__ == "__main__":
 
     if args.raw is True:
         codegen_raw()
-

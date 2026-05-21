@@ -23,7 +23,7 @@ import flute.utils
 class PackFactor(object):
 
     def __init__(self, pack_bits: int, num_bits: int) -> None:
-        if num_bits not in [2, 3, 4]:
+        if num_bits not in [1, 2, 3, 4]:
             raise ValueError
         self.pack_bits = pack_bits
         self.num_bits = num_bits
@@ -48,7 +48,7 @@ class FluteConfig(QuantizationConfig):
         group_size: int,
         num_sms_packed: int,
     ) -> None:
-        if num_bits not in [2, 3, 4]:
+        if num_bits not in [1, 2, 3, 4]:
             raise ValueError
 
         self.num_bits = num_bits

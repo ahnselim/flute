@@ -22,6 +22,7 @@ MAIN_CUDA_VERSION = "12.1"
 DISTRIBUTION_NAME = "flute-kernel"
 LIBRARY_NAME = "flute"
 CUTLASS_PATH = "/workspace/cutlass/"
+CUTLASS_PATH = os.environ.get("CUTLASS_PATH", CUTLASS_PATH)
 
 
 # References:
@@ -89,6 +90,10 @@ def get_extensions() -> List:
     sources = (
         list(glob.glob(os.path.join(extensions_dir, "*.cpp"))) +
         list(glob.glob(os.path.join(extensions_dir, "*.cu"))))
+    sources = [
+        src for src in sources
+        if os.path.basename(src) != "qgemm_kernel_example.cu"
+    ]
 
     ext_modules = [
         CUDAExtension(

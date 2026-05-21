@@ -89,7 +89,123 @@ _qgemm_raw(int M,
     } while (false)
 
     // Generated Code Below
-    if constexpr (cute::is_same_v<NumBits, cute::Int<2>>)
+    if constexpr (cute::is_same_v<NumBits, cute::Int<1>>)
+    {
+        switch (template_id)
+        {
+        case 0:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 64, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 1:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 64, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 2:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 64, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 3:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 64, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 4:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 5:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 6:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 7:
+            RUN_QGEMM(T, TQ, T2, 1, 256, 32, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 8:
+            RUN_QGEMM(T, TQ, T2, 1, 128, 16, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 9:
+            RUN_QGEMM(T, TQ, T2, 1, 128, 16, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 10:
+            RUN_QGEMM(T, TQ, T2, 1, 128, 16, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 11:
+            RUN_QGEMM(T, TQ, T2, 1, 128, 16, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 12:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 64, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 13:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 64, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 14:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 64, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 15:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 64, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 16:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 17:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 18:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 19:
+            RUN_QGEMM(T, TQ, T2, 2, 256, 32, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 20:
+            RUN_QGEMM(T, TQ, T2, 2, 128, 16, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 21:
+            RUN_QGEMM(T, TQ, T2, 2, 128, 16, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 22:
+            RUN_QGEMM(T, TQ, T2, 2, 128, 16, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 23:
+            RUN_QGEMM(T, TQ, T2, 2, 128, 16, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 24:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 64, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 25:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 64, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 26:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 64, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 27:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 64, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 28:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 29:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 30:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 31:
+            RUN_QGEMM(T, TQ, T2, 4, 256, 32, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 32:
+            RUN_QGEMM(T, TQ, T2, 4, 128, 16, 64, 32, 2, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 33:
+            RUN_QGEMM(T, TQ, T2, 4, 128, 16, 64, 32, 3, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 34:
+            RUN_QGEMM(T, TQ, T2, 4, 128, 16, 64, 32, 4, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        case 35:
+            RUN_QGEMM(T, TQ, T2, 4, 128, 16, 64, 32, 5, NumBits::value, GroupSize::value, kVectorized   , kMixed, kStreamK, 2, 1);
+            break;
+        default:
+            AT_ERROR("Unsupported template_id value");
+        }
+    }
+    else if constexpr (cute::is_same_v<NumBits, cute::Int<2>>)
     {
         switch (template_id)
         {
@@ -798,6 +914,10 @@ _qgemm_raw(int M,
         const cudaStream_t           stream)
 
 
+// INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 1, 32);
+INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 1, 64);
+INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 1, 128);
+INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 1, 256);
 // INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 2, 32);
 INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 2, 64);
 INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 2, 128);
@@ -811,6 +931,10 @@ INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 4, 64);
 INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 4, 128);
 INSTANTIATE_TEMPLATE(cute::half_t    , cute::uint16_t, __half2       , 4, 256);
 
+// INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 1, 32);
+INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 1, 64);
+INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 1, 128);
+INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 1, 256);
 // INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 2, 32);
 INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 2, 64);
 INSTANTIATE_TEMPLATE(cute::bfloat16_t, cute::uint16_t, __nv_bfloat162, 2, 128);

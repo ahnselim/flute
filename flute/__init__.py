@@ -63,6 +63,22 @@ else:
 
 if os.path.exists(TEMPLATE_CONFIGS_PATH):
     TEMPLATE_CONFIGS = torch.load(TEMPLATE_CONFIGS_PATH, weights_only=True)
+    # Experimental 1-bit path: reuse the 2-bit template catalog until
+    # dedicated 1-bit tuning results exist.
+    if TEMPLATE_CONFIGS is not None:
+        # The generated 1-bit kernel currently exposes template_id 0..35 only.
+        # Reusing every 2-bit template id causes tuning to pick ids that the
+        # runtime dispatch rejects with "Unsupported template_id value".
+        supported_one_bit_template_ids = set(range(36))
+        one_bit_configs = {}
+        for (num_bits, template_id), config in TEMPLATE_CONFIGS.items():
+            if (
+                int(num_bits) == 2
+                and int(template_id) in supported_one_bit_template_ids
+                and (1, int(template_id)) not in TEMPLATE_CONFIGS
+            ):
+                one_bit_configs[(1, int(template_id))] = dict(config)
+        TEMPLATE_CONFIGS.update(one_bit_configs)
     click.secho(f"[FLUTE]: Template configs loaded from {TEMPLATE_CONFIGS_PATH}", fg="green")
 else:
     TEMPLATE_CONFIGS = None

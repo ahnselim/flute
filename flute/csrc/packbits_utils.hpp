@@ -52,9 +52,9 @@ struct DequantizationTraits
     CUTE_STATIC_ASSERT(cute::is_same_v<T , typename QuantMapEngine3::value_type> == true);
 
     static constexpr int            kNumBits    = NumBits::value;
-    static constexpr int            kNumPacked2 = NumBits::value == 4 ? 8          : 16;
-    static constexpr cute::uint16_t kMask       = NumBits::value == 4 ? 0x000f     : 0x0003;
-    static constexpr cute::uint32_t kMask2      = NumBits::value == 4 ? 0x000000ff : 0x0000000f;
+    static constexpr int            kNumPacked2 = NumBits::value == 4 ? 8 : (NumBits::value == 2 ? 16 : 32);
+    static constexpr cute::uint16_t kMask       = NumBits::value == 4 ? 0x000f : (NumBits::value == 2 ? 0x0003 : 0x0001);
+    static constexpr cute::uint32_t kMask2      = NumBits::value == 4 ? 0x000000ff : (NumBits::value == 2 ? 0x0000000f : 0x00000003);
     static constexpr cute::uint32_t kMaskSync   = 0xffffffff;
 
     // vectorize the source and target
@@ -66,7 +66,7 @@ struct DequantizationTraits
     auto qmap2_view  = cute::recast<T2 >(qmap2);
     auto qmap3_view  = cute::recast<TI >(qmap3);
 
-    CUTE_STATIC_ASSERT_V(NumBits{} == cute::_4{} || NumBits{} == cute::_2{});
+    CUTE_STATIC_ASSERT_V(NumBits{} == cute::_4{} || NumBits{} == cute::_2{} || NumBits{} == cute::_1{});
     CUTE_STATIC_ASSERT_V(cute::size<0>(source ) == cute::size<0>(source_vec ) * cute::_2{});
     CUTE_STATIC_ASSERT_V(cute::size<0>(source2) == cute::size<0>(source2_vec) * cute::_2{});
     CUTE_STATIC_ASSERT_V(cute::size<0>(target ) == cute::size<0>(target_vec ) * cute::_2{});
