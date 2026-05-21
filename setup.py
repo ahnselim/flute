@@ -7,6 +7,7 @@ import os
 import re
 import glob
 import subprocess
+from pathlib import Path
 from typing import List
 from setuptools import find_packages, setup
 from packaging.version import Version, parse
@@ -21,8 +22,16 @@ MAIN_CUDA_VERSION = "12.1"
 
 DISTRIBUTION_NAME = "flute-kernel"
 LIBRARY_NAME = "flute"
-CUTLASS_PATH = "/workspace/cutlass/"
-CUTLASS_PATH = os.environ.get("CUTLASS_PATH", CUTLASS_PATH)
+_DEFAULT_CUTLASS_CANDIDATES = [
+    "/workspace/cutlass/",
+    str(Path(ROOT_DIR).resolve().parents[1] / "kernel" / "cutlass-v3.4.1"),
+]
+CUTLASS_PATH = os.environ.get("CUTLASS_PATH")
+if not CUTLASS_PATH:
+    CUTLASS_PATH = next(
+        (path for path in _DEFAULT_CUTLASS_CANDIDATES if os.path.isdir(path)),
+        _DEFAULT_CUTLASS_CANDIDATES[0],
+    )
 
 
 # References:
